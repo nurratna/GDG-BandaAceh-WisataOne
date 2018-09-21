@@ -1,4 +1,4 @@
-var app = angular.module('myApp', ['ngRoute','BerandaController','LoginController']);
+var app = angular.module('myApp', ['ui.bootstrap', 'ngRoute','BerandaController','LoginController']);
 app.config(['$routeProvider',function($routeProvider){
     $routeProvider
         .when("/beranda", {
@@ -13,4 +13,16 @@ app.config(['$routeProvider',function($routeProvider){
         .otherwise({
             redirectTo:"/beranda",
         });
-}])
+}]);
+
+app.directive("scroll", function ($window) {
+    return function(scope, element, attrs) {
+        angular.element($window).bind("scroll", function() {
+            if (this.pageYOffset >= 100) {
+                element.addClass("header-scrolled");
+            } else {
+                element.removeClass("header-scrolled");
+            }
+        });
+    };
+});
